@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,5 +11,18 @@
         {% else %}
             <p>Hello, stranger!</p>
         {% endif %}
+
+        <main>
+        	<h1>{{ books.count|apnumber|title }} book{{ books.count|pluralize }}</h1>
+        	{% for book in books %}
+        	    <h3>{{ book.title }}</h3>
+        	    <p>{{ book.list_authors }}</p>
+        	    {% if book.is_favourite %}
+        	        <span><small><strong>favourite</strong></small></span>
+        	    {% endif %}
+        	    {{ book.review }}
+                <br><br>
+        	{% endfor %}
+        </main>
     </body>
 </html>
