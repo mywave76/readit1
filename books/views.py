@@ -1,7 +1,11 @@
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 def list_books(request):
-	return HttpResponse("Hello, {}!".format(request.user.username))
+	"""
+	List the books that have reviews
+	"""
+	return render(request, "list.html")
+	#return HttpResponse("Hello, {}!".format(request.user.username))
 
