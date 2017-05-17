@@ -1,6 +1,8 @@
 #from django.http import HttpResponse
+from django.db.models import Count
 from django.shortcuts import render
-from .models import Book
+from django.views.generic import View
+from .models import Author, Book
 
 # Create your views here.
 def list_books(request):
@@ -16,3 +18,18 @@ def list_books(request):
 
 	return render(request, "list.html", context)
 	#return HttpResponse("Hello, {}!".format(request.user.username))
+
+class AuthorList(View):
+	def get(self, request):
+		
+		authors = Author.objects.annotate(
+			published_books=Count('books')
+		).filter(
+		    published_books__gt=0
+		)
+		
+		context = {
+		    'authors': authors,
+		}
+
+		return render(request, 'authors.html', context)
