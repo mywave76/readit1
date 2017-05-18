@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Readit!</title>
+		<meta charset="utf-8">
+		<meta name="description"content="My great book review site">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<header>
+			<div class="welcome">
+				{% if request.user.is_authenticated %}
+		            <p>Hello, {{ request.user.username|title }}: you last logged in at {{ request.user.last_login|date:"D d M Y" }} which is {{ request.user.last_login|timesince }} ago</p>
+		        {% else %}
+		            <p>Hello, stranger!</p>
+		        {% endif %}
+			</div>
+		</header>
+
+		<main>
+			{% block content %}{% endblock content %}
+		</main>
+
+		<footer>
+			<p>My awesome book review site!</p>
+		</footer>
+	</body>
+</html>
